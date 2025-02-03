@@ -92,6 +92,34 @@ if submitted:
         except Exception as e:
             st.error(f"⚠️ Calculation error: {str(e)}")
 
+# Save log to a file
+            log_entry = f"Date: {datetime.datetime.now()}\n"
+            log_entry += f"Low Temp: {lt}°C, High Temp: {ht}°C\n"
+            log_entry += f"Low Temp Output: {ltb} mV/V, High Temp Output: {htb} mV/V\n"
+            log_entry += f"Bridge Resistance: {br} Ω, Wire Type: {wire_type}\n"
+            log_entry += f"Optimal Wire Length: {round(L, 1)} mm, Bridge Configuration: {tracker}\n"
+            log_entry += f"Bridge Arm Ratio: {BA:.4f}, Calculated Resistance: {R:.2f} Ω\n"
+            log_entry += "-" * 50 + "\n"
+            
+            # Append to log file
+            with open("calculation_logs.txt", "a") as log_file:
+                log_file.write(log_entry)
+
+            st.info("Your calculation has been logged successfully for later reference.")
+
+        except ZeroDivisionError:
+            st.error("⚠️ Temperature values cannot be identical.")
+        except Exception as e:
+            st.error(f"⚠️ Calculation error: {str(e)}")
+
+
+
+
+
+
+
+
+
 # Documentation sidebar
 with st.sidebar:
     st.header("📖 User Guide")
