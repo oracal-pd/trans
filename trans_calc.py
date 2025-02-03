@@ -96,7 +96,7 @@ with st.sidebar:
     4. Click "Calculate" to get results.
     
     ⚠️ **Important Notes:**
-    - Low Temperature must be below 0°C (original VBA requirement).
+    - Low Temperature must be below 0°C.
     - All fields are mandatory for calculation to proceed.
     """)
     st.divider()
