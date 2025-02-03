@@ -101,4 +101,4 @@ with st.sidebar:
     """)
     st.divider()
     st.markdown("⚙️ **Calculation Methodology:**")
-    st.caption("Maintains original VBA formulas for copper and balco wire calculations.")
+    st.caption("Maintains original TRANS CALC formulas for copper and balco wire calculations.")
