@@ -36,10 +36,15 @@ with st.form("input_form"):
 if submitted:
     error_messages = []
     
-    if (lt is None or ht is None or 
-        not all([lt, ht, ltb, htb, br]) or 
-        not wire_type):
-        
+    # Validate that low temperature is negative and high temperature is positive
+    if lt is not None and lt >= 0:
+        error_messages.append("❌ Low Temperature must be a negative value.")
+    
+    if ht is not None and ht <= 0:
+        error_messages.append("❌ High Temperature must be a positive value.")
+    
+    # Check for missing values or incomplete selections
+    if lt is None or ht is None or not all([lt, ht, ltb, htb, br]) or not wire_type:
         if lt is None:
             error_messages.append("❌ Low Temperature must be entered.")
         if ht is None:
@@ -48,10 +53,12 @@ if submitted:
             error_messages.append("❌ All fields must be filled.")
         if not wire_type:
             error_messages.append("❌ Wire type must be selected.")
-        
-        for error in error_messages:
-            st.error(error)
-    else:
+    
+    # Display error messages if any validation fails
+    for error in error_messages:
+        st.error(error)
+    
+    if not error_messages:
         # Perform calculations
         try:
             BA = (htb - ltb) / (ht - lt)
@@ -97,6 +104,7 @@ with st.sidebar:
     
     ⚠️ **Important Notes:**
     - Low Temperature must be below 0°C.
+    - High Temperature must be above 0°C.
     - All fields are mandatory for calculation to proceed.
     """)
     st.divider()
